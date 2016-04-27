@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lw+a1&4^)#kn5@w*899)(u03gagnb=*kch#@7=iu7-29i01+^3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".greedy-music.herokuapp.com"]
 
 
 # Application definition
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'GreedyMusic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd479sklfajjblp',
+        'USER': 'vqtnalqkjyiwqw',
+        'PASSWORD': 'v4qu2MDpYSikJ3a2Igj8XR6Zgl',
+        'HOST': 'ec2-54-243-125-46.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -134,3 +138,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+CSRF_COOKIE_SECURE = True
