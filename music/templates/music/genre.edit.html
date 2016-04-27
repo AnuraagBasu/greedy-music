@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container">
+    <h4>Update Details | Genre</h4>
+
+    <form action="{% url 'music:genreUpdate' genre.id %}" method="post">
+        {% csrf_token %}
+
+        <div class="group">
+            <input name="name" class="form-control" placeholder="Genre Name" value="{{genre.name}}">
+        </div>
+
+        <div class="group">
+            <textarea name="description" class="form-control" placeholder="Genre Description">{{genre.description}}</textarea>
+        </div>
+
+        <div class="group">
+            <button type="submit" class="action-btn">Update Genre</button>
+        </div>
+    </form>
+
+    {% if error_message %}
+        <span class="info-section">
+            {{ error_message }}
+        </span>
+    {% endif %}
+</div>

@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container">
+    <h4>Track's Genres</h4>
+
+    <div class="search-form">
+        <form action="{% url 'music:showAllGenres' %}">
+            <div class="group">
+                <input name="search" class="search-control" placeholder="Search Track" value="{{searchText}}">
+            </div>
+
+            <input type="hidden" type="submit">
+        </form>
+    </div>
+
+    {% if genreList %}
+    <ul>
+        {% for genre in genreList %}
+        <li>
+            <a href="/music/genre/{{genre.id}}">{{genre.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Genres added yet</p>
+    {% endif %}
+
+    <div class="action-btn">
+        <a href="/music/genre/add">Add New Genre</a>
+    </div>
+</div>

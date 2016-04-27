@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container">
+    <h4>Track Details</h4>
+
+    <div class="section track-wrapper">
+        <div class="track-title">{{track.title}}</div>
+        <div class="track-rating">
+            <span class="label">Rating:</span>
+            <span>{{track.rating}}</span>
+        </div>
+        <div class="track-genre">
+            <span class="label">Genre:</span>
+
+            <span class="genre">
+                {% with track.genres.all|first as firstGenre %}
+                <a href="/music/genre/{{firstGenre.id}}">{{firstGenre.name}}</a>
+                {% endwith %}
+            </span>
+
+            {% for genre in track.genres.all %}
+                {% if not forloop.first %}
+                <span>,</span>
+                <span class="genre">
+                    <a href="/music/genre/{{genre.id}}">{{genre.name}}</a>
+                </span>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="edit-icon">
+            <a href="/music/track/{{track.id}}/edit">Edit</a>
+        </div>
+    </div>
+</div>

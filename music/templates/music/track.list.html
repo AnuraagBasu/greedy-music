@@ -1,0 +1,42 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container track-list-container">
+    <h4>Music Tracks</h4>
+
+    {% if tracksList %}
+    <ul class="track-wrapper">
+        {% for track in tracksList %}
+        <li class="track">
+            <a href="/music/track/{{track.id}}">
+                <span class="track-title">{{track.title}}</span>
+
+                {% if track.getGenresAsString %}
+                <span class="genres">
+                    {{ track.getGenresAsString }}
+                </span>
+                {% endif %}
+
+                <span class="ratings-section">
+                    {% for rating in track.getRatingIterable %}
+                    <span class="star completed"></span>
+                    {% endfor %}
+
+                    {% for rating in track.getRemainingRatingiterable %}
+                    <span class="star"></span>
+                    {% endfor %}
+                </span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="info-wrapper">
+        <p>No Tracks Added Yet</p>
+    </div>
+    {% endif %}
+
+    <div class="action-btn">
+        <a href="/music/track/add">Add New Track</a>
+    </div>
+</div>

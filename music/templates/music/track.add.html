@@ -1,0 +1,38 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container">
+    <h4>Add Details | Track</h4>
+
+    <form action="{% url 'music:addTrack' %}" method="post">
+        {% csrf_token %}
+
+        <div class="group">
+            <input id="trackTitle" name="title" placeholder="Track Title" class="form-control">
+        </div>
+
+        <div class="group">
+            <select class="form-control" name="genres" multiple="multiple">
+                {% for genre in genreList %}
+                <option value="{{genre.id}}">{{genre.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="group">
+            <input class="form-control" name="rating" type="number" max="5" min="0" value="0">
+            <span>/</span>
+            <span>5</span>
+        </div>
+
+        <div class="group">
+            <button type="submit" class="action-btn">Add Track</button>
+        </div>
+    </form>
+
+    {% if error_message %}
+        <span class="info-section">
+            {{ error_message }}
+        </span>
+    {% endif %}
+</div>

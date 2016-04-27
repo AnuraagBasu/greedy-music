@@ -1,0 +1,38 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/index.css' %}">
+
+<div class="container">
+    <h4>Update Details | Track</h4>
+
+    <form action="{% url 'music:trackUpdate' track.id %}" method="post">
+        {% csrf_token %}
+
+        <div class="group">
+            <input name="title" placeholder="Track Title" class="form-control" value="{{track.title}}">
+        </div>
+
+        <div class="group">
+            <select class="form-control" name="genres" multiple="multiple">
+                {% for genre in genreList %}
+                    {% if genre in track.genres.all %}
+                    <option value="{{genre.id}}" selected>{{genre.name}}</option>
+                    {% else %}
+                    <option value="{{genre.id}}">{{genre.name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="group">
+            <input class="form-control" name="rating" type="number" max="5" min="0" value="{{track.rating}}">
+            <span>/</span>
+            <span>5</span>
+        </div>
+
+        <div class="group">
+            <button type="submit" class="action-btn">Update Track</button>
+        </div>
+    </form>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</div>
