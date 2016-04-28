@@ -123,13 +123,13 @@ def showAllGenres (request):
             genreList = Genre.objects.all()
             context = dict()
             context['genreList'] = genreList
-            context['searchText'] = searchText
+            context['searchText'] = ""
             return render(request, "music/genre.list.html", context)
     else:
         genreList = Genre.objects.all()
         context = dict()
         context['genreList'] = genreList
-        context['searchText'] = searchText
+        context['searchText'] = ""
         return render(request, "music/genre.list.html", context)
 
 def addGenre (request):
