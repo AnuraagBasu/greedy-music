@@ -151,6 +151,8 @@ print("project root: ")
 print(PROJECT_ROOT)
 print("sttuc root: ")
 print(STATIC_ROOT)
+print("base dir: ")
+print(BASE_DIR)
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
