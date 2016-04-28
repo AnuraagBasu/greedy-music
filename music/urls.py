@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^genre/(?P<genreId>[0-9]+)/edit/$', views.genreUpdate, name='genreUpdate'),
 ]
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
