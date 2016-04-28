@@ -18,7 +18,4 @@ urlpatterns = [
     url(r'^genre/add', views.addGenre, name='addGenre'),
     url(r'^genre/(?P<genreId>[0-9]+)/$', views.genreDetail, name='genreDetail'),
     url(r'^genre/(?P<genreId>[0-9]+)/edit/$', views.genreUpdate, name='genreUpdate'),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
