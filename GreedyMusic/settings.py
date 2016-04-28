@@ -200,3 +200,5 @@ LOGGING = {
         },
     }
 }
+
+CONN_MAX_AGE = None
