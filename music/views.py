@@ -17,20 +17,32 @@ def index (request):
     return render(request, "music/index.html", context)
 
 def showAllTracks (request):
-    print("showing all tracks")
-    searchText = request.GET['search']
-    print("searchText: " + searchText)
-    if searchText!="":
-        print("search text found")
-        tracksList = Track.objects.filter(title__icontains=searchText)
+    if request.method == 'GET' and 'search' in request.GET:
+        print("showing all tracks")
+        searchText = request.GET['search']
+        if searchText is not None and searchText != '':
+            print("searchText: " + searchText)
+            tracksList = Track.objects.filter(title__icontains=searchText)
+            context = dict()
+            context['tracksList'] = tracksList
+            context['maxRating'] = range(1, 6)
+            context['searchText'] = searchText
+            return render(request, "music/track.list.html", context)
+        else:
+            tracksList = Track.objects.order_by('createDate')
+            context = dict()
+            context['tracksList'] = tracksList
+            context['maxRating'] = range(1, 6)
+            context['searchText'] = ""
+            return render(request, "music/track.list.html", context)
     else:
-        print("search text not found")
         tracksList = Track.objects.order_by('createDate')
-    context = dict()
-    context['tracksList'] = tracksList
-    context['maxRating'] = range(1, 6)
-    context['searchText'] = searchText
-    return render(request, "music/track.list.html", context)
+        context = dict()
+        context['tracksList'] = tracksList
+        context['maxRating'] = range(1, 6)
+        context['searchText'] = ""
+        return render(request, "music/track.list.html", context)
+
 
 def addTrack (request):
     if request.method == "POST":
@@ -97,19 +109,28 @@ def trackUpdate (request, trackId):
         return render(request, "music/track.edit.html", context)
 
 def showAllGenres (request):
-    print("showing all genres")
-    searchText = request.GET.get('search')
-    print("searchText: " + searchText)
-    if searchText!="":
-        print("searchtext found")
-        genreList = Genre.objects.filter(name__icontains=searchText)
+    if request.method == 'GET' and 'search' in request.GET:
+        print("showing all genres")
+        searchText = request.GET['search']
+        if searchText is not None and searchText != '':
+            print("searchText: " + searchText)
+            genreList = Genre.objects.filter(name__icontains=searchText)
+            context = dict()
+            context['genreList'] = genreList
+            context['searchText'] = searchText
+            return render(request, "music/genre.list.html", context)
+        else:
+            genreList = Genre.objects.all()
+            context = dict()
+            context['genreList'] = genreList
+            context['searchText'] = searchText
+            return render(request, "music/genre.list.html", context)
     else:
-        print("search text not found")
         genreList = Genre.objects.all()
-    context = dict()
-    context['genreList'] = genreList
-    context['searchText'] = searchText
-    return render(request, "music/genre.list.html", context)
+        context = dict()
+        context['genreList'] = genreList
+        context['searchText'] = searchText
+        return render(request, "music/genre.list.html", context)
 
 def addGenre (request):
     if request.method == "POST":
