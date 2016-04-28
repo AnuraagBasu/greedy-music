@@ -17,10 +17,14 @@ def index (request):
     return render(request, "music/index.html", context)
 
 def showAllTracks (request):
+    print("showing all tracks")
     searchText = request.GET.get('search')
+    print("searchText: " + searchText)
     if searchText!="":
+        print("search text found")
         tracksList = Track.objects.filter(title__icontains=searchText)
     else:
+        print("search text not found")
         tracksList = Track.objects.order_by('createDate')
     context = dict()
     context['tracksList'] = tracksList
@@ -93,10 +97,14 @@ def trackUpdate (request, trackId):
         return render(request, "music/track.edit.html", context)
 
 def showAllGenres (request):
+    print("showing all genres")
     searchText = request.GET.get('search')
+    print("searchText: " + searchText)
     if searchText!="":
+        print("searchtext found")
         genreList = Genre.objects.filter(name__icontains=searchText)
     else:
+        print("search text not found")
         genreList = Genre.objects.all()
     context = dict()
     context['genreList'] = genreList
