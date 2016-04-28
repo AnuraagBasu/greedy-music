@@ -18,7 +18,7 @@ def index (request):
 
 def showAllTracks (request):
     print("showing all tracks")
-    searchText = request.GET.get('search')
+    searchText = request.GET['search']
     print("searchText: " + searchText)
     if searchText!="":
         print("search text found")
