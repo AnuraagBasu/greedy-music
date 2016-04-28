@@ -1,1 +1,1 @@
-web: gunicorn GreedyMusic.wsgi --log-file -
+web: python manage.py collectstatic --noinput; gunicorn GreedyMusic.wsgi --log-file -
