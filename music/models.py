@@ -18,8 +18,6 @@ class Track (models.Model):
             genresAsString = genresAsString + " | "
             genresAsString = genresAsString + genre.name
 
-        print(genresAsString)
-        print(genresAsString!="")
         if genresAsString!="":
             value = "[" + genresAsString[3:] + "]"
             return value
