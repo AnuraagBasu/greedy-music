@@ -147,6 +147,11 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
+print("project root: ")
+print(PROJECT_ROOT)
+print("sttuc root: ")
+print(STATIC_ROOT)
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
