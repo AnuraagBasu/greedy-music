@@ -17,11 +17,15 @@ def index (request):
     return render(request, "music/index.html", context)
 
 def showAllTracks (request):
-    tracksList = Track.objects.order_by('createDate')
+    searchText = request.GET.get('search')
+    if searchText!="":
+        tracksList = Track.objects.filter(title__icontains=searchText)
+    else:
+        tracksList = Track.objects.order_by('createDate')
     context = dict()
     context['tracksList'] = tracksList
     context['maxRating'] = range(1, 6)
-    context['searchText'] = request.GET.get('search')
+    context['searchText'] = searchText
     return render(request, "music/track.list.html", context)
 
 def addTrack (request):

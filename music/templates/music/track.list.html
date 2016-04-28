@@ -4,6 +4,16 @@
 <div class="container track-list-container">
     <h4>Music Tracks</h4>
 
+    <div class="search-form">
+        <form action="{% url 'music:showAllTracks' %}">
+            <div class="group">
+                <input name="search" class="search-control" placeholder="Search Track" value="{{searchText}}">
+            </div>
+
+            <input type="hidden" type="submit">
+        </form>
+    </div>
+
     {% if tracksList %}
     <ul class="track-wrapper">
         {% for track in tracksList %}
